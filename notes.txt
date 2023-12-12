@@ -1,0 +1,20 @@
+Runtime Analysis
+
+Results for the extraLargeArray
+insert 925.9951 ms
+append 2.3435 ms
+
+Clearly the unshift method (insert) is far inferior to the push method (append) in the extraLargeArray case, by nearly 500x.
+
+Results for the extraLargeArray     Results for the largeArray          Results for the mediumArray    Results for the smallArray    Results for the tinyArray
+insert 950.3669 ms                  insert 7.3188 ms                    insert 751.8 μs                 insert 6.6 μs                   insert 29.9 μs
+append 2.2978 ms                    append 155.8 μs                     append 943.7 μs                 append 2.7 μs                   append 3.6 μs
+
+After getting results from each array, I see a clear trend of unshift/insert being consistently slower than push/append. With my tests, push won each time but this is a pretty small sample size. After learning what specifically unshift is doing, this really isn't surprising. I did think it was interesting that the closest they got was with the smallArray and not the tiny one, although even there the push method was nearly 2x as fast.
+Since unshift is essentially reordering the entire array, it has to go through each index and slide them all down, whereas push just appends to the end of the array. Obviously this means that unshift will take longer, though I was surprised to see how large the difference was.
+
+
+
+
+
+
